@@ -30,6 +30,7 @@ export const WithStretchy = <R, P>(
       imageWrapperStyle,
       imageResizeMode,
       onScroll,
+      cacheKey
     } = props;
 
     const stretchy = useStretchy({
@@ -47,6 +48,7 @@ export const WithStretchy = <R, P>(
           imageHeight={imageHeight || stretchy.heightBasedOnRatio}
           imageOverlay={imageOverlay}
           onLayout={stretchy.onImageWrapperLayout}
+          cacheKey={cacheKey}
         />
         <WrappedComponent {...props} stretchy={stretchy} ref={ref} />
       </View>

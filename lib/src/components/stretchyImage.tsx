@@ -1,7 +1,7 @@
 import React, { useMemo } from 'react';
 import { View, Animated, LayoutChangeEvent } from 'react-native';
 import { StretchyProps } from '../types';
-import FastImage from 'react-native-fast-image'
+import CachedImage from 'expo-cached-image'
 import { stretchyImageStyles as styles } from './styles';
 
 export interface StretchyImageProps
@@ -10,7 +10,7 @@ export interface StretchyImageProps
   imageHeight: number;
   onLayout(event: LayoutChangeEvent): void;
 }
-const AnimatedImageBackground = Animated.createAnimatedComponent(FastImage);
+const AnimatedImageBackground = Animated.createAnimatedComponent(CachedImage);
 
 export const StretchyImage: React.FC<StretchyImageProps> = ({
   animation,
@@ -20,6 +20,7 @@ export const StretchyImage: React.FC<StretchyImageProps> = ({
   imageHeight,
   imageOverlay,
   onLayout,
+  cacheKey
 }) => {
   const transformStyles = useMemo(
     () => ({
@@ -48,6 +49,7 @@ export const StretchyImage: React.FC<StretchyImageProps> = ({
       <AnimatedImageBackground
         source={image || {}}
         resizeMode={imageResizeMode}
+        cacheKey={cacheKey}
         style={[styles.animatedImageBackground, transformStyles]}>
         {Boolean(imageOverlay) && imageOverlay}
       </AnimatedImageBackground>
